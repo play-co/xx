@@ -1,0 +1,20 @@
+{
+	"name": "xx",
+	"version": "0.0.1",
+	"description": "Object Locking for JavaScript: It's what you need when you need it, but you have to wait in line to get it.",
+	"engine": [ "node >=0.2.0" ],
+	"author": "Chris A. Taylor <mrcatid@gmail.com>",
+	"contributors": [
+	],
+	"repository": {
+		"type" : "git",
+		"url" : "http://github.com/gameclosure/xx.git"
+	},
+	"devDependencies": {
+		"mocha": "~1.3.0"
+	},
+	"scripts": {
+		"test": "mocha -R spec -t 5000"
+	},
+	"main": "lib/xx"
+}
