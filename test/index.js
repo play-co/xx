@@ -5,7 +5,7 @@ describe("xx", function () {
 
 	describe("#simple()", function () {
 		it("no contention", function (done) {
-			var mutex = xx.create();
+			var mutex = xx();
 
 			mutex(function() {
 				mutex();
@@ -17,7 +17,7 @@ describe("xx", function () {
 
 	describe("#onewaiter()", function () {
 		it("two simultaneous accesses", function (done) {
-			var mutex = xx.create();
+			var mutex = xx();
 			var ctr = 0;
 
 			// Acquire 1
@@ -51,7 +51,7 @@ describe("xx", function () {
 
 	describe("#twowaiters()", function () {
 		it("three simultaneous accesses", function (done) {
-			var mutex = xx.create();
+			var mutex = xx();
 			var ctr = 0;
 
 			// Acquire 1
