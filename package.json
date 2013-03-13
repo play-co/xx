@@ -1,6 +1,6 @@
 {
 	"name": "xx",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Object Locking for JavaScript: It's what you need when you need it, but you have to wait in line to get it.",
 	"engine": [ "node >=0.2.0" ],
 	"author": "Chris A. Taylor <mrcatid@gmail.com>",
