@@ -3,9 +3,9 @@ var xx = require("../lib/xx");
 
 describe("xx", function () {
 
-	describe("#pass()", function () {
-		it("should pass a reference to the next step", function (done) {
-			var mutex = xx();
+	describe("#simple()", function () {
+		it("no contention", function (done) {
+			var mutex = xx.create();
 
 			mutex(function() {
 				mutex();
@@ -14,4 +14,28 @@ describe("xx", function () {
 			});
 		});
 	});
+
+	describe("#onewaiter()", function () {
+		it("two simultaneous accesses", function (done) {
+			var mutex = xx.create();
+			var ctr = 0;
+
+			mutex(function() {
+				if (++ctr !== 1) done(1);
+
+				mutex();
+			});
+
+			process.nextTick(function() {
+				mutex
+			});
+
+			mutex(function() {
+				if (++ctr !== 2) done(1);
+
+				mutex();
+			});
+		});
+	});
+
 });
