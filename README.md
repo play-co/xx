@@ -27,7 +27,7 @@ config.xx(
 
 		// Call without a function when you want to unlock the object:
 		config.xx();
-	}
+	}.bind(this)
 );
 ```
 
