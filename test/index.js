@@ -20,22 +20,75 @@ describe("xx", function () {
 			var mutex = xx.create();
 			var ctr = 0;
 
+			// Acquire 1
 			mutex(function() {
-				if (++ctr !== 1) done(1);
-
-				mutex();
+				assert(++ctr === 1);
 			});
 
 			process.nextTick(function() {
-				mutex
+				assert(++ctr === 2);
+
+				// Release 1
+				mutex();
+
+				assert(ctr === 2);
 			});
 
+			// Acquire 2
 			mutex(function() {
-				if (++ctr !== 2) done(1);
+				assert(++ctr === 3);
 
+				// Release 2
 				mutex();
+
+				assert(ctr === 3);
+
+				done();
 			});
 		});
 	});
 
+
+	describe("#twowaiters()", function () {
+		it("three simultaneous accesses", function (done) {
+			var mutex = xx.create();
+			var ctr = 0;
+
+			// Acquire 1
+			mutex(function() {
+				assert(++ctr === 1);
+			});
+
+			process.nextTick(function() {
+				assert(++ctr === 2);
+
+				// Release 1
+				mutex();
+
+				assert(ctr === 2);
+			});
+
+			// Acquire 2
+			mutex(function() {
+				assert(++ctr === 4);
+
+				// Release 2
+				mutex();
+
+				assert(ctr === 4);
+
+				done();
+			});
+
+			// Acquire 3
+			mutex(function() {
+				assert(++ctr === 3);
+
+				// Release 3
+				mutex();
+
+				assert(ctr === 3);
+			});
+		});
+	});
 });
